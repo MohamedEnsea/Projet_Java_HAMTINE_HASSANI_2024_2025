@@ -59,21 +59,6 @@ public class Main {
             physicEngine.addToMovingSpriteList(hero);
             physicEngine.setEnvironment(level.getSolidSpriteList());
 
-            // Créer des pièges et les ajouter à la liste
-            Image trapImage = ImageIO.read(new File("./img/trap.png"));
-            Trap trap1 = new Trap(100, 200, trapImage, 50, 50, 10);
-            Trap trap2 = new Trap(200, 400, trapImage, 50, 50, 20);
-            Trap trap3 = new Trap(120, 400, trapImage, 50, 50, 20);
-
-            physicEngine.addToTrapList(trap1);
-            physicEngine.addToTrapList(trap2);
-            physicEngine.addToTrapList(trap3);
-
-            // Ajouter les pièges à l'affichage
-            renderEngine.addToRenderList(trap1);
-            renderEngine.addToRenderList(trap2);
-            renderEngine.addToRenderList(trap3);
-
             // Ajouter le KeyListener au JFrame
             displayZoneFrame.addKeyListener(gameEngine);
             displayZoneFrame.requestFocusInWindow();

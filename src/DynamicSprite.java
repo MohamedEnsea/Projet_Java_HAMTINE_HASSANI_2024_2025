@@ -38,6 +38,14 @@ public class DynamicSprite extends SolidSprite{
         }
 
         for (Sprite s : environment){
+            if ((s instanceof Trap) && (s!=this)){
+                if (((SolidSprite) s).intersect(moved)){
+                    this.takingDamage = true;
+                    return true;
+                }
+            }else{
+                this.takingDamage = false;
+            }
             if ((s instanceof SolidSprite) && (s!=this)){
                 if (((SolidSprite) s).intersect(moved)){
                     return false;
@@ -75,27 +83,6 @@ public class DynamicSprite extends SolidSprite{
     }
 
     // Méthode pour gérer la collision avec les pièges et réduire la vie
-    public void checkCollisionWithTraps(ArrayList<Trap> traps) {
-        Rectangle2D.Double heroHitBox = (Rectangle2D.Double) this.getHitBox();
-
-        for (Trap trap : traps) {
-            if (trap.getHitBox().intersects(heroHitBox)) {
-                // Si le héros entre dans le piège, commencer à prendre des dégâts
-                if (!isInTrap) {
-                    isInTrap = true;  // Le héros est dans un piège
-                    startTakingDamage();  // Commencer à prendre des dégâts
-                }
-                // Appliquer les dégâts progressifs
-                applyProgressiveDamage();
-            } else {
-                // Si le héros sort du piège, arrêter de prendre des dégâts
-                if (isInTrap) {
-                    isInTrap = false;
-                    stopTakingDamage();  // Arrêter de prendre des dégâts
-                }
-            }
-        }
-    }
 
     public int getLife() {
         return life;
@@ -129,16 +116,6 @@ public class DynamicSprite extends SolidSprite{
         }
     }
 
-
-    // Commencer à prendre des dégâts (lorsqu'il touche un piège)
-    public void startTakingDamage() {
-        this.takingDamage = true;
-    }
-
-    // Arrêter de prendre des dégâts (lorsqu'il quitte le piège)
-    public void stopTakingDamage() {
-        this.takingDamage = false;
-    }
 
 
     @Override

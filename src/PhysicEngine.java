@@ -58,12 +58,7 @@ public class PhysicEngine implements Engine{
             for (Trap trap : traps) {
                 if (dynamicSprite.getHitBox().intersects(trap.getHitBox())) {
                     isInTrap = true;
-                    dynamicSprite.startTakingDamage();
                 }
-            }
-
-            if (!isInTrap) {
-                dynamicSprite.stopTakingDamage();  // Si le héros n'est plus dans un piège, arrête les dégâts
             }
 
             // Appliquer les dégâts progressifs si le héros est sur un piège

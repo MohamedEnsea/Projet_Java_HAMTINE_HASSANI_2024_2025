@@ -14,6 +14,7 @@ public class Playground {
             final Image imageTree = ImageIO.read(new File("./img/tree.png"));
             final Image imageGrass = ImageIO.read(new File("./img/grass.png"));
             final Image imageRock = ImageIO.read(new File("./img/rock.png"));
+            final Image imageTrap = ImageIO.read(new File("./img/trap.png"));
 
             final int imageTreeWidth = imageTree.getWidth(null);
             final int imageTreeHeight = imageTree.getHeight(null);
@@ -23,6 +24,9 @@ public class Playground {
 
             final int imageRockWidth = imageRock.getWidth(null);
             final int imageRockHeight = imageRock.getHeight(null);
+
+            final int imageTrapWidth = imageTrap.getWidth(null);
+            final int imageTrapHeight = imageTrap.getHeight(null);
 
             BufferedReader bufferedReader = new BufferedReader(new FileReader(pathName));
             String line=bufferedReader.readLine();
@@ -40,6 +44,9 @@ public class Playground {
                         case 'R' : environment.add(new SolidSprite(columnNumber*imageRockWidth,
                                 lineNumber*imageRockHeight, imageRock, imageRockWidth, imageRockHeight));
                             break;
+                        case 'P' : environment.add(new Trap(columnNumber*imageTrapWidth,
+                                lineNumber*imageTrapHeight, imageTrap, imageTrapWidth, imageTrapHeight, 10));
+                            break;
                     }
                     columnNumber++;
                 }
@@ -56,7 +63,9 @@ public class Playground {
     public ArrayList<Sprite> getSolidSpriteList(){
         ArrayList <Sprite> solidSpriteArrayList = new ArrayList<>();
         for (Sprite sprite : environment){
-            if (sprite instanceof SolidSprite) solidSpriteArrayList.add(sprite);
+            if (sprite instanceof SolidSprite) {
+                solidSpriteArrayList.add(sprite);
+            }
         }
         return solidSpriteArrayList;
     }
